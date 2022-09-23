@@ -286,9 +286,11 @@ void flic2_on_incoming_packet(struct Flic2Button *button, double current_utc_tim
     if (s->incoming_packet_pos != 0) {
         memcpy(s->incoming_packet + s->incoming_packet_pos, packet + 1, len - 1);
         s->incoming_packet_pos += (uint8_t)(len - 1);
-        packet = s->incoming_packet;
-        len = s->incoming_packet_pos;
-        s->incoming_packet_pos = 0;
+        if (last_fragment) {
+            packet = s->incoming_packet;
+            len = s->incoming_packet_pos;
+            s->incoming_packet_pos = 0;
+        }
     } else if (!last_fragment) {
         memcpy(s->incoming_packet, packet + 1, len - 1);
         s->incoming_packet_pos = (uint8_t)(len - 1);
@@ -985,6 +987,7 @@ bool flic2_get_next_event(struct Flic2Button *button, double current_utc_time, d
     if (has_space_for_outgoing_packet) {
         if (s->outgoing_packet_pos != s->outgoing_packet_len) {
             flic2_internal_set_outgoing_packet_event(button, event);
+            return true;
         } else {
             switch (s->state) {
                 case STATE_SEND_FULL_VERIFY1:

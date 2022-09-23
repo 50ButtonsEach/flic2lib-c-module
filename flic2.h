@@ -865,7 +865,7 @@ void flic2_init(struct Flic2Button *button, const uint8_t bd_addr[6], const stru
  * 
  * @param button An initialized Flic2Button object.
  * @param current_time The current time in seconds of the system's steady_clock.
- * @param att_mtu The ATT_MTU that has been negotiated. May be smaller than the actual ATT_MTU if it's unknown, but must be at least 23 (which is the default ATT_MTU). Recommended: 132.
+ * @param att_mtu The ATT_MTU that has been negotiated. May be smaller than the actual ATT_MTU if it's unknown, but must be at least 23 (which is the default ATT_MTU). Recommended: 130.
  */
 void flic2_start(struct Flic2Button *button, double current_time, uint16_t att_mtu);
 
