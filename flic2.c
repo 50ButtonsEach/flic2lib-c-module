@@ -575,9 +575,9 @@ void flic2_on_incoming_packet(struct Flic2Button *button, double current_utc_tim
         s->pending_event_button_event = true;
         if (packet != s->incoming_packet) {
             memcpy(s->incoming_packet, packet, len);
-            s->incoming_packet_pos = (uint8_t)len;
-            s->button_event_pos = 0;
         }
+        s->incoming_packet_pos = (uint8_t)len;
+        s->button_event_pos = 0;
         return;
     }
     
