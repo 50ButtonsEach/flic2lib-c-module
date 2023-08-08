@@ -1011,7 +1011,7 @@ static void sha512_finish(SHA512_STATE* state, uint8_t hash[64]) {
     
     int32_t num_zeros_to_add = 112 - (state->num_bytes % 128);
     if (num_zeros_to_add < 0) {
-        num_zeros_to_add += 112;
+        num_zeros_to_add += 128;
     }
     num_zeros_to_add += 8; // Upper 128 bits of length is always 0
     
